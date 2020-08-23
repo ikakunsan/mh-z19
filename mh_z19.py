@@ -58,8 +58,11 @@ def mh_z19():
   try:
     ser = connect_serial()
     while 1:
-      result=ser.write(b"\xff\x01\x86\x00\x00\x00\x00\x00\x79")
-      s=ser.read(9)
+      for i in range (10):
+        result=ser.write(b"\xff\x01\x86\x00\x00\x00\x00\x00\x79")
+        s=ser.read(9)
+        if len(s) > 0:
+          break
 
       if p_ver == '2':
         if len(s) >= 4 and s[0] == "\xff" and s[1] == "\x86":
@@ -89,8 +92,11 @@ def read_all(serial_console_untouched=False):
   try:
     ser = connect_serial()
     while 1:
-      result=ser.write(b"\xff\x01\x86\x00\x00\x00\x00\x00\x79")
-      s=ser.read(9)
+      for i in range (10):
+        result=ser.write(b"\xff\x01\x86\x00\x00\x00\x00\x00\x79")
+        s=ser.read(9)
+        if len(s) > 0:
+          break
 
       if p_ver == '2':
         if len(s) >= 9 and s[0] == "\xff" and s[1] == "\x86":
